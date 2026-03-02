@@ -512,7 +512,7 @@
       <select class="form-select" style="width:160px" id="filter-cat" onchange="renderHistory()">
         <option value="">Todas las categorías</option>
       </select>
-      <input type="month" class="form-input" style="width:160px" id="filter-month" onchange="renderHistory()">
+      <input type="date" class="form-input" style="width:170px" id="filter-day" onchange="renderHistory()">
     </div>
 
     <div class="export-bar">
@@ -835,7 +835,7 @@ function renderHistory() {
   const search = document.getElementById('filter-search').value.toLowerCase();
   const type = document.getElementById('filter-type').value;
   const cat = document.getElementById('filter-cat').value;
-  const month = document.getElementById('filter-month').value;
+  const day = document.getElementById('filter-day').value;
 
   // Populate cat filter
   const allCats = [...new Set(transactions.map(t => t.category))];
@@ -847,8 +847,8 @@ function renderHistory() {
     const matchSearch = !search || t.desc.toLowerCase().includes(search) || t.category.toLowerCase().includes(search);
     const matchType = !type || t.type === type;
     const matchCat = !cat || t.category === cat;
-    const matchMonth = !month || t.date.startsWith(month);
-    return matchSearch && matchType && matchCat && matchMonth;
+    const matchDay = !day || t.date === day;
+    return matchSearch && matchType && matchCat && matchDay;
   });
 
   const tbody = document.getElementById('history-body');
